@@ -8,17 +8,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import './App.css';
 
 function App() {
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  // console.log(JSON.parse(user));
+
   return (
     <Router>
       <Navigation />
 
       <Container>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='*' render={() => {
-            return <h1>404</h1>;
-          }} />
+          <Route exact path='/' render={() => <Home user={user} />} />
+          <Route exact path='/about' render={() => <About user={user} />} />
+          <Route exact path='*' render={() => <h1>404</h1>} />
         </Switch>
       </Container>
     </Router>

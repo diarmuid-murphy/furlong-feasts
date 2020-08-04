@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const logger = require('morgan');
 
 const app = express();
 
@@ -9,15 +11,23 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/furlon
 
 mongoose.connect(MONGODB_URI, {
 	useNewUrlParser: true,
-	useUnifiedTopology: true
+	useUnifiedTopology: true,
+	useFindAndModify: false
 });
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
 
+app.use('/auth', require('./routes/authRoutes'));
 app.use('/api', require('./routes/apiRoutes'));
+
+console.log(process.env.PASSWORD);
 
 // Send every request to the React app
 // Define any API routes before this runs
