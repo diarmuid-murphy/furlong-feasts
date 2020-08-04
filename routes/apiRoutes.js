@@ -15,7 +15,8 @@ router.post('/create', (req, res) => {
 		console.log(data);
 		res.send('Data added.');
 	}).catch((err) => {
-		console.log('Uh-oh: ' + err);
+		console.log(err);
+		res.status(500).send(err)
 	});
 })
 
