@@ -57,7 +57,7 @@ class Home extends React.Component {
 	render() {
 		return (
 			<Jumbotron style={this.style.jumbotron}>
-				<h1>Sign in to Furlong Feasts</h1>
+				<h1>Sign into Furlong Feasts</h1>
 				<p>No pre-existing account is required, just enter your information along with the password that was shared with you.</p>
 	
 				<Form>
